@@ -1,0 +1,31 @@
+#!/bin/bash
+#Info Extraction Script (IES)
+#v.1 Creation of script -CB 
+echo "Welcome to IES - Info Extraction Script";sleep 3
+echo "Starting up";wait;sleep 3
+echo "Getting system info";wait;sleep 3
+echo "Hostname is $HOSTNAME" > sys_info.txt
+uname -a >> sys_info.txt
+echo "*getting accounts";wait
+echo "~~~~~~~~~~~accounts logged into system~~~~~~~~" >> sys_info.txt
+last >> sys_info.txt
+echo "~~~~~~~~~~~~~~~~/etc/passwd CONTENTS~~~~~~~~~~" >> sys_info.txt
+cat /etc/passwd >> sys_info.txt
+echo "*checking services";wait
+echo "~~~~~~~~~~~~~~~~~~~~Services~~~~~~~~~~~~~~~~~~" >> sys_info.txt;wait
+service --status-all >> sys_info.txt
+chkconfig --list >> sys_info.txt
+systemctl >> sys_info.txt
+echo "*getting ps output";wait
+echo "~~~~~~~~~~~~~~~~~PS AUX OUTPUT~~~~~~~~~~~~~~~~" >> sys_info.txt;wait
+ps -aux >> sys_info.txt
+echo "~~~~~~~~~~~~~~~~PS EF OUTPUT~~~~~~~~~~~~~~~~~~" >> sys_info.txt;wait
+ps -ef >> sys_info.txt
+echo "Getting Network Info";wait;sleep 3
+echo "*getting netstat";wait
+echo "~~~~~~~~~~~~~~~~netstat -apn~~~~~~~~~~~~~~~~~~" >> net_info.txt
+netstat -apn >> net_info.txt;wait
+echo "*getting lsof";wait
+echo "~~~~~~~~~~~~~~~~lsof OUTPUT~~~~~~~~~~~~~~~~~~~" >> net_info.txt
+lsof -i >> net_info.txt;wait
+echo "Script complete - ran time $SECONDS seconds"
